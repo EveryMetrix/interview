@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Interview.AppService.Abstractions\Interview.AppService.Abstractions.csproj" />
+    <ProjectReference Include="..\Interview.Domain\Interview.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
