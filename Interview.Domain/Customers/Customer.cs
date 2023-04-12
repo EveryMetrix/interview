@@ -15,9 +15,7 @@ namespace Interview.Domain.Customers
         }
 
         public long Id { get; protected set; }
-        public decimal Score { get; protected set; } = decimal.Zero;
-
-        public void AddScore(decimal scoreIncrement) => Score += scoreIncrement;
+        public decimal Score { get; protected set; }
     }
 
     public class CustomerComparer : IComparer<Customer>
