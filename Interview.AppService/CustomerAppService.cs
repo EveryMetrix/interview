@@ -88,16 +88,19 @@ namespace Interview.AppService
 
         public async Task<decimal> UpdateScoreAsync(long customerId, decimal scoreIncrement)
         {
-            var score = _CustomerIdScoreMap.AddOrUpdate(customerId, scoreIncrement, (_, oldScore) =>
+            var score = _CustomerIdScoreMap.AddOrUpdate(customerId, _ =>
+            {
+                _Customers.Add(new Customer(customerId, scoreIncrement));
+                return scoreIncrement;
+            }, (_, oldScore) =>
             {
                 var newScore = oldScore + scoreIncrement;
                 if (oldScore > 0)
                     _Customers.RemoveWhere(x => x.Id == customerId);
+                if (newScore > 0)
+                    _Customers.Add(new Customer(customerId, newScore));
                 return newScore;
             });
-
-            if (score > 0)
-                _Customers.Add(new Customer(customerId, score));
 
             return await Task.FromResult(score);
         }
